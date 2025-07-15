@@ -24,18 +24,15 @@ count = 0
 max_count = driver.find_element(By.CLASS_NAME, "text-default").text.split(" ")[4]
 max_count = int(max_count)
 print(max_count)
-check_dupes = set()
 while count < max_count:
     all_elements = driver.find_element(By.CLASS_NAME, "mfcss_card-article-2--grid-container-flex")
     span_elments = all_elements.find_elements(By.CLASS_NAME, "sd-articlecard")
-    
+    span_elments = span_elments[-24:]
     for e in span_elments:
-        if e.text not in check_dupes:
-            print(count)
-            print(e.text)
-            print("\n")
-            check_dupes.add(e.text)
-            count += 1
+        print(count)
+        print(e.text)
+        print("\n")
+        count += 1
     extend_button = driver.find_element(By.CLASS_NAME, "mfcss_load-more-articles")
-    driver.execute_script('window.scrollBy(0,-250)')
     extend_button.click()
+    time.sleep(1)
