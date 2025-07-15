@@ -1,0 +1,53 @@
+FIRST TASK ALBSOLUTIONS INTERNSHIP
+#########
+Task 1 - Web scrapping form 4 different websites. Using Selenium
+
+I chose Selenium because it is one of the most popular python libraries for automating tasks, and one of the most known for web scrapping.
+This is good because it can also take info from JavaScript web pages, so those that are dynamic, rather than other libraries that
+work for static html pages only.
+
+I started watching a video from freecodecamp to understand more about selenium first, trying to understand how it works, especially
+because I do not have strong foundations in Python, only some slight knowledge.
+However, that tutorial was outdated, so i opted for another youtube video, from tech with tim. I am creating everything just like he 
+is doing, so that I can learn with him.
+Link: https://www.youtube.com/watch?v=NB8OceGZGjA
+
+We need to import webdriver so we can automate the opening of a web browser.
+We then instantiate the class.
+We need to download the chrome driver from a separate link.
+Link to download it: https://googlechromelabs.github.io/chrome-for-testing/
+Extract it to c:/SeleniumDrivers just so I have it somewhere.
+
+Then I need to access the executable using a service, just as below 
+service = Service(executable_path="C:/SeleniumDrivers/chromedriver.exe")
+
+After that, I use this service path to initiate my driver, just as follows:
+driver.get("https://www.google.com")
+
+Now if i run, the driver will open and close immediately, thats why i made a 10 secs timer so i can see it for a little bit.
+import time
+time.sleep(10)
+
+Now lets try to make a search in google
+First lets find using inspect the class the search field has, so I can access it.
+    from selenium.webdriver.common.by import by
+    input_element = driver.find_element(By.CLASS_NAME, "gLFyf")
+
+After this, I can write something in the search field, after already accessing it earlier.
+    from selenium.webdriver.common.keys import keys
+    input_element.send_keys("andri pashollari" + Keys.ENTER)
+
+We can create the following code to wait 5 seconds for this element to appear 
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "gLFyf"))
+    )
+
+If we then want to click a certain link, we can use the click() function of the element
+    link = driver.find_element(By.PARTIAL_LINK_TEXT, "Andri Pashollari")
+    link.click()
+
+Now we will try a new website called cookie clickers
+Link: https://orteil.dashnet.org/cookieclicker/
+
